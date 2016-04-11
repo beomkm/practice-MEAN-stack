@@ -3,18 +3,17 @@ var passport = require('passport');
 var jwt = require('express-jwt');
 var router = express.Router();
 
+var mongoose = require('mongoose');
+var Post = mongoose.model('Post');
+var Comment = mongoose.model('Comment');
+var User = mongoose.model('User');
+
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
-
-var mongoose = require('mongoose');
-var Post = mongoose.model('Post');
-var Comment = mongoose.model('Comment');
-var User = mongoose.model('User');
 
 router.get('/posts', function(req, res, next) {
   Post.find(function(err, posts){
